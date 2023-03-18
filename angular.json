@@ -1,8 +1,5 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -11,9 +8,6 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
         }
       },
       "root": "",
@@ -34,9 +28,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/scss/argon.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/clipboard/dist/clipboard.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -110,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "RestauranteFrontEnd"
+  "cli": {
+    "analytics": "64283474-7b67-4cf6-91d8-0e433075cd66"
+  }
 }
