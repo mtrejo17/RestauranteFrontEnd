@@ -16,7 +16,7 @@ export class UsuariosService {
     const url = environment.apiUrl + '/usuario';
     return new Promise((resolve,reject) => {
       this.httpClient.get(url).toPromise()
-      .then((success: any) => {
+      .then((success: any) => {        
         resolve(success.usuarios);
       })
       .catch(error => {
