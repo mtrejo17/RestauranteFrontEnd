@@ -1,13 +1,19 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "RestauranteFrontEnd": {
+    "xtreme-admin-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "",
@@ -17,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/restaurante-front-end",
+            "outputPath": "dist/xtreme-admin-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,12 +34,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/assets/scss/argon.scss"
+              "src/assets/scss/style.scss",
+              "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/clipboard/dist/clipboard.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -72,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "RestauranteFrontEnd:build:production"
+              "browserTarget": "xtreme-admin-angular:build:production"
             },
             "development": {
-              "browserTarget": "RestauranteFrontEnd:build:development"
+              "browserTarget": "xtreme-admin-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "RestauranteFrontEnd:build"
+            "browserTarget": "xtreme-admin-angular:build"
           }
         },
         "test": {
@@ -106,8 +110,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "64283474-7b67-4cf6-91d8-0e433075cd66"
   }
 }
