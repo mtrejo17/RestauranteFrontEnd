@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "xtreme-admin-angular": {
+    "restaurante-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/xtreme-admin-angular",
+            "outputPath": "dist/restaurante-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -76,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "xtreme-admin-angular:build:production"
+              "browserTarget": "restaurante-frontend:build:production"
             },
             "development": {
-              "browserTarget": "xtreme-admin-angular:build:development"
+              "browserTarget": "restaurante-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "xtreme-admin-angular:build"
+            "browserTarget": "restaurante-frontend:build"
           }
         },
         "test": {
