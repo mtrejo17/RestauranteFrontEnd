@@ -8,7 +8,6 @@ export const ProjectRoutes: Routes = [
     children: [
       {
         path: 'usuarios',
-        canActivate: [EsAdministradorGuard],
         component: UsuariosComponent,
         data: {
           title: 'Usuarios',

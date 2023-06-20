@@ -23,6 +23,37 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
+    title: 'Sistema',
+    icon: 'mdi mdi-dots-horizontal',
+    class: 'nav-small-cap',
+    extralink: true,
+    label: '',
+    labelClass: '',
+    submenu: []
+  },
+  {
+    path: '',
+    title: 'Configuracion',
+    icon: 'fas fa-cog',
+    class: 'has-arrow',
+    extralink: false,
+    label: '',
+    labelClass: '',
+    submenu: [
+      {
+        path: '/project/usuarios',
+        title: 'Usuarios',
+        icon: 'fas fa-users',
+        class: '',
+        extralink: false,
+        label: '',
+        labelClass: '',
+        submenu: []
+    }
+    ]
+  },
+  {
+    path: '',
     title: 'UI Components',
     icon: 'mdi mdi-dots-horizontal',
     class: 'nav-small-cap',
