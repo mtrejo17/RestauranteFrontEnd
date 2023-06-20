@@ -32,7 +32,7 @@ export class UsuarioService {
       })
       .catch(error => {
         reject(error);
-      })
+      });
     });
   }
 
@@ -59,5 +59,21 @@ export class UsuarioService {
     } else {
       return Promise.resolve(false);
     }
+  }
+
+  getUsuarios() : Promise<any>
+  {
+    const uri = environment.apiUrl + '/usuario';
+    console.log('uri-->', uri);
+    return new Promise((resolve, reject) =>
+    {
+      this.httpClient.get(uri).toPromise()
+      .then((success: any) => {
+          resolve(success.usuarios);
+      })
+      .catch(error => {
+        reject(error);
+      })
+    });
   }
 }
