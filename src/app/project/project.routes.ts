@@ -1,5 +1,6 @@
 import { Routes} from "@angular/router";
 import { UsuariosComponent } from "./usuarios/components/usuarios/usuarios.component";
+import { EsAdministradorGuard } from "./security/guards/es-administrador.guard";
 
 export const ProjectRoutes: Routes = [
   {
@@ -7,6 +8,7 @@ export const ProjectRoutes: Routes = [
     children: [
       {
         path: 'usuarios',
+        canActivate: [EsAdministradorGuard],
         component: UsuariosComponent,
         data: {
           title: 'Usuarios',
