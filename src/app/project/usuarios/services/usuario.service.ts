@@ -64,7 +64,6 @@ export class UsuarioService {
   getUsuarios() : Promise<any>
   {
     const uri = environment.apiUrl + '/usuario';
-    console.log('uri-->', uri);
     return new Promise((resolve, reject) =>
     {
       this.httpClient.get(uri).toPromise()

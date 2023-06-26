@@ -7,6 +7,7 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
+  usuarios: any [] = [];
 
   constructor(
     private usuarioService: UsuarioService
@@ -20,6 +21,7 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.getUsuarios()
     .then(usuarios => {
       console.log('usuarios--', usuarios);
+      this.usuarios = usuarios;
     })
     .catch(error => {
 
