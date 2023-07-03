@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RouterModule } from '@angular/router';
 import { ProjectRoutes } from './project.routes';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,6 +12,8 @@ import { ProjectRoutes } from './project.routes';
   imports: [
     CommonModule,
     RouterModule.forChild(ProjectRoutes),
+    FormsModule,
+    ReactiveFormsModule,
     UsuariosModule
   ]
 })

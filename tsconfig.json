@@ -9,8 +9,9 @@
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
     "experimentalDecorators": true,
-    "target": "es2020",
+    "target": "es2015",
     "strict": true,
     "typeRoots": [
       "node_modules/@types"

@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4>{{titulo}}</h4>
+  <button type="button" class="btn-close" aria-label="Cerrar" (click)="cerrar()"></button>
+</div>
+<form name="formUsuario" [formGroup]="formUsuario" (ngSubmit)="guardar()">
+  <div class="modal-body">
+    <div class="formGroup" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}">
+      <label>A. Paterno</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fas fa-id-bagde"></i>
+        </span>
+        <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="apellidoPaterno" name="apellidoPaterno" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}"/>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" (click)="cerrar()" class="btn btn-danger">
+      <i class="fas fa-times me-1"></i> Cancelar
+    </button>
+  </div>
+</form>
+
