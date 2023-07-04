@@ -4,14 +4,45 @@
 </div>
 <form name="formUsuario" [formGroup]="formUsuario" (ngSubmit)="guardar()">
   <div class="modal-body">
-    <div class="formGroup" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}">
+    <div class="form-group" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}">
       <label>A. Paterno</label>
       <div class="input-group">
         <span class="input-group-text">
-          <i class="fas fa-id-bagde"></i>
+          <i class="fas fa-id-badge"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="apellidoPaterno" name="apellidoPaterno" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}"/>
+        <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="apellidoPaterno" name="apellidoPaterno" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}"/>
       </div>
+      <small *ngIf="formUsuario.controls['apellidoPaterno'].hasError('required') && formUsuario.controls['apellidoPaterno'].touched" class="form-text text-danger">Apellido Paterno requerido.</small>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': formUsuario.controls['apellidoMaterno'].touched && formUsuario.controls['apellidoMaterno'].errors}">
+      <label>A. Materno</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fas fa-id-badge"></i>
+        </span>
+        <input type="text" class="form-control" placeholder="Apellido Materno" formControlName="apellidoMaterno" name="apellidoMaterno" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['apellidoMaterno'].touched && formUsuario.controls['apellidoMaterno'].errors}"/>
+      </div>
+      <small *ngIf="formUsuario.controls['apellidoMaterno'].hasError('required') && formUsuario.controls['apellidoMaterno'].touched" class="form-text text-danger">Apellido Materno requerido.</small>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': formUsuario.controls['nombre'].touched && formUsuario.controls['nombre'].errors}">
+      <label>Nombre</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fas fa-id-badge"></i>
+        </span>
+        <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" name="nombre" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['nombre'].touched && formUsuario.controls['nombre'].errors}"/>
+      </div>
+      <small *ngIf="formUsuario.controls['nombre'].hasError('required') && formUsuario.controls['nombre'].touched" class="form-text text-danger">Nombre requerido.</small>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': formUsuario.controls['userName'].touched && formUsuario.controls['userName'].errors}">
+      <label>Nombre de Usuario</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fas fa-id-badge"></i>
+        </span>
+        <input type="text" class="form-control" placeholder="Nombre de Usuario" formControlName="userName" name="userName" [ngClass]="{'has-danger': formUsuario.controls['userName'].touched && formUsuario.controls['userName'].errors}"/>
+      </div>
+      <small *ngIf="formUsuario.controls['userName'].hasError('required') && formUsuario.controls['userName'].touched" class="form-text text-danger">Nombre de Usuario requerido.</small>
     </div>
   </div>
   <div class="modal-footer">
