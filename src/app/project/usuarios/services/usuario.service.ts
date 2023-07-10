@@ -88,4 +88,18 @@ export class UsuarioService {
       });
     });
   }
+
+  getRoles(): Promise<any[]>
+  {
+    const uri = environment.apiUrl + '/roles';
+    return new Promise ((resolve, reject) => {
+      this.httpClient.get(uri).toPromise()
+      .then((success: any) => {
+        resolve(success.roles);
+      })
+      .catch(error => {
+        reject(error);
+      });
+    });
+  }
 }
