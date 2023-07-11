@@ -34,7 +34,10 @@ export class UsuariosComponent implements OnInit {
       console.log('nuevo Usuario');
       const modal = this.ngbModal.open(UsuarioModalComponent, {backdrop: 'static', keyboard: false});
       modal.result.then(success => {
-
+        console.log('success-->', success);
+        if(success.creado) {
+          this.cargarUsuarios();
+        }
       })
       .catch(error => {
 

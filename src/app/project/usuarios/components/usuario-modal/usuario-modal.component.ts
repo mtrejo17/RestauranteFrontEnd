@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from '../../services/usuario.service';
 import * as _ from 'lodash';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuario-modal',
@@ -78,10 +79,45 @@ export class UsuarioModalComponent implements OnInit {
       return;
     }
 
+    const nuevoUsuario = {
+      apellidoPaterno: this.formUsuario.value.apellidoPaterno.trim().toUpperCase(),
+      apellidoMaterno: this.formUsuario.value.apellidoMaterno.trim().toUpperCase(),
+      nombre: this.formUsuario.value.nombre.trim().toUpperCase(),
+      userName: this.formUsuario.value.userName,
+      role: this.formUsuario.value.role
+    };
+    this.usuarioService.crearUsuario(nuevoUsuario)
+    .then(success => {
+      Swal.fire({
+        title: 'Usuario creado exitosamente',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+      this.modal.close(
+        {
+          creado: true
+        }
+      );
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Usuario no creado'
+      })
+    });
   }
 
   cerrar() {
-    this.modal.close();
+    this.modal.close(
+      {
+        creado: false
+      }
+    );
   }
 
 }

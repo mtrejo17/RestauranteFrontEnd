@@ -10,7 +10,7 @@
         <span class="input-group-text">
           <i class="fas fa-id-badge"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="apellidoPaterno" name="apellidoPaterno" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}"/>
+        <input type="text" class="form-control mayusculas" placeholder="Apellido Paterno" formControlName="apellidoPaterno" name="apellidoPaterno" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['apellidoPaterno'].touched && formUsuario.controls['apellidoPaterno'].errors}"/>
       </div>
       <small *ngIf="formUsuario.controls['apellidoPaterno'].hasError('required') && formUsuario.controls['apellidoPaterno'].touched" class="form-text text-danger">Apellido Paterno requerido.</small>
     </div>
@@ -20,7 +20,7 @@
         <span class="input-group-text">
           <i class="fas fa-id-badge"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Apellido Materno" formControlName="apellidoMaterno" name="apellidoMaterno" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['apellidoMaterno'].touched && formUsuario.controls['apellidoMaterno'].errors}"/>
+        <input type="text" class="form-control mayusculas" placeholder="Apellido Materno" formControlName="apellidoMaterno" name="apellidoMaterno" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['apellidoMaterno'].touched && formUsuario.controls['apellidoMaterno'].errors}"/>
       </div>
       <small *ngIf="formUsuario.controls['apellidoMaterno'].hasError('required') && formUsuario.controls['apellidoMaterno'].touched" class="form-text text-danger">Apellido Materno requerido.</small>
     </div>
@@ -30,7 +30,7 @@
         <span class="input-group-text">
           <i class="fas fa-id-badge"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" name="nombre" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['nombre'].touched && formUsuario.controls['nombre'].errors}"/>
+        <input type="text" class="form-control mayusculas" placeholder="Nombre" formControlName="nombre" name="nombre" (change)="sugerirUserName()" [ngClass]="{'has-danger': formUsuario.controls['nombre'].touched && formUsuario.controls['nombre'].errors}"/>
       </div>
       <small *ngIf="formUsuario.controls['nombre'].hasError('required') && formUsuario.controls['nombre'].touched" class="form-text text-danger">Nombre requerido.</small>
     </div>
@@ -61,7 +61,7 @@
     <button type="button" (click)="cerrar()" class="btn btn-danger">
       <i class="fas fa-times me-1"></i> Cancelar
     </button>
-    <button type="submit" class="btn btn-success">
+    <button type="submit" [disabled]="formUsuario.invalid" class="btn btn-success">
       <i class="fas fa-check me-1"></i>Guardar
     </button>
   </div>

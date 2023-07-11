@@ -11,15 +11,6 @@ export class UsuarioService {
     private httpClient: HttpClient
   ) { }
 
-  /*
-    creadenciales
-
-    {
-      userName: "root",
-      password: "supervaca"
-    }
-  */
-
   login(credenciales: any): Promise<any> {
     const uri = environment.apiUrl + '/login';
     return new Promise((resolve, reject) => {
@@ -96,6 +87,19 @@ export class UsuarioService {
       this.httpClient.get(uri).toPromise()
       .then((success: any) => {
         resolve(success.roles);
+      })
+      .catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  crearUsuario(usuario: any): Promise<any> {
+    const uri = environment.apiUrl + '/usuario';
+    return new Promise ((resolve, reject) => {
+      this.httpClient.post(uri, usuario).toPromise()
+      .then((success: any) => {
+        resolve(success);
       })
       .catch(error => {
         reject(error);
