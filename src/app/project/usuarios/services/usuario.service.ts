@@ -106,4 +106,18 @@ export class UsuarioService {
       });
     });
   }
+
+  actualizarUsuario(usuario: any): Promise<any> {
+    const uri = environment.apiUrl + '/usuario/' + usuario._id;
+    return new Promise((resolve,reject) => {
+      this.httpClient.put(uri, usuario).toPromise()
+      .then((success: any) => {
+        resolve(success);
+      })
+      .catch(error => {
+        reject(error);
+      });
+    });
+  }
+
 }

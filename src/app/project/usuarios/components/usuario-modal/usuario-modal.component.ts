@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from '../../services/usuario.service';
 import * as _ from 'lodash';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-usuario-modal',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class UsuarioModalComponent implements OnInit {
 
-  titulo = "Nuevo usuario";
+  titulo: string;
   roles: any[] = [];
   formUsuario: FormGroup;
   constructor(
@@ -21,14 +22,30 @@ export class UsuarioModalComponent implements OnInit {
     private usuarioService: UsuarioService
   ) { }
 
+  @Input() accion: number;
+  @Input() usuario: any;
   async ngOnInit(): Promise<void> {
-    this.formUsuario = this.formBuilder.group({
-      apellidoPaterno: new FormControl(null, Validators.required),
-      apellidoMaterno: new FormControl(null, Validators.required),
-      nombre: new FormControl(null, Validators.required),
-      userName: new FormControl(null, Validators.required),
-      role: new FormControl(null, Validators.required)
-    });
+    if(this.accion === 1) {
+      this.titulo = "Nuevo Usuario";
+      this.formUsuario = this.formBuilder.group({
+        apellidoPaterno: new FormControl(null, Validators.required),
+        apellidoMaterno: new FormControl(null, Validators.required),
+        nombre: new FormControl(null, Validators.required),
+        userName: new FormControl(null, Validators.required),
+        role: new FormControl(null, Validators.required)
+      });
+    } else {
+      this.titulo = "Editando Usuario";
+      this.formUsuario = this.formBuilder.group({
+        apellidoPaterno: new FormControl(this.usuario.apellidoPaterno, Validators.required),
+        apellidoMaterno: new FormControl(this.usuario.apellidoMaterno, Validators.required),
+        nombre: new FormControl(this.usuario.nombre, Validators.required),
+        userName: new FormControl(this.usuario.userName, Validators.required),
+        role: new FormControl(this.usuario.role, Validators.required)
+      });
+    }
+
+
     this.roles = await this.usuarioService.getRoles();
     console.log('roles-->', this.roles);
   }
@@ -63,11 +80,16 @@ export class UsuarioModalComponent implements OnInit {
   }
 
   guardar(){
-    this.nuevoUsuario();
+    if(this.accion === 1){
+      this.nuevoUsuario();
+    } else {
+      this.actualizarUsuario();
+    }
+
   }
 
   nuevoUsuario(){
-    console.log('formUsuario-->', this.formUsuario);
+
     if(this.formUsuario.invalid) {
 
       const controles = this.formUsuario.controls;
@@ -108,16 +130,72 @@ export class UsuarioModalComponent implements OnInit {
         icon: 'error',
         title: 'Oops...',
         text: 'Usuario no creado'
-      })
+      });
+    });
+  }
+
+  actualizarUsuario(){
+    if(this.formUsuario.invalid) {
+
+      const controles = this.formUsuario.controls;
+      _.forEach(controles, control => {
+        control.markAsTouched();
+        control.markAsDirty();
+      });
+
+      return;
+    }
+
+    const usuarioActualizar = {
+      apellidoPaterno: this.formUsuario.value.apellidoPaterno.trim().toUpperCase(),
+      apellidoMaterno: this.formUsuario.value.apellidoMaterno.trim().toUpperCase(),
+      nombre: this.formUsuario.value.nombre.trim().toUpperCase(),
+      userName: this.formUsuario.value.userName,
+      role: this.formUsuario.value.role,
+      _id: this.usuario._id
+    };
+
+    this.usuarioService.actualizarUsuario(usuarioActualizar)
+    .then(success => {
+      Swal.fire({
+        title: 'Usuario actualizado exitosamente',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+      this.modal.close(
+        {
+          actualizado: true
+        }
+      );
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Usuario no actualizado'
+      });
     });
   }
 
   cerrar() {
-    this.modal.close(
-      {
-        creado: false
-      }
-    );
+    if(this.accion === 1) {
+      this.modal.close(
+        {
+          creado: false
+        }
+      );
+    } else {
+      this.modal.close(
+        {
+          actualizado: false
+        }
+      );
+    }
+
   }
 
 }

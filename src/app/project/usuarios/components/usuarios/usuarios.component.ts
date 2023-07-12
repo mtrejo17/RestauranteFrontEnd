@@ -33,9 +33,23 @@ export class UsuariosComponent implements OnInit {
   nuevoUsuario() {
       console.log('nuevo Usuario');
       const modal = this.ngbModal.open(UsuarioModalComponent, {backdrop: 'static', keyboard: false});
+      modal.componentInstance.accion = 1;
       modal.result.then(success => {
-        console.log('success-->', success);
         if(success.creado) {
+          this.cargarUsuarios();
+        }
+      })
+      .catch(error => {
+
+      });
+  }
+
+  editarUsuario(usuario: any) {
+    const modal = this.ngbModal.open(UsuarioModalComponent, {backdrop: 'static', keyboard: false});
+      modal.componentInstance.accion = 2;
+      modal.componentInstance.usuario = usuario;
+      modal.result.then(success => {
+        if(success.actualizado) {
           this.cargarUsuarios();
         }
       })
