@@ -120,4 +120,43 @@ export class UsuarioService {
     });
   }
 
+  activarUsuario(idUsuario: string): Promise<any> {
+    const uri = environment.apiUrl + '/usuario/activar/' + idUsuario;
+    return new Promise((resolve,reject) => {
+      this.httpClient.put(uri,{}).toPromise()
+      .then(success => {
+        resolve(success);
+      })
+      .catch(error => {
+        reject(error);
+      })
+    });
+  }
+
+  desactivarUsuario(idUsuario: string): Promise<any> {
+    const uri = environment.apiUrl + '/usuario/desactivar/' + idUsuario;
+    return new Promise((resolve,reject) => {
+      this.httpClient.put(uri,{}).toPromise()
+      .then(success => {
+        resolve(success);
+      })
+      .catch(error => {
+        reject(error);
+      })
+    });
+  }
+
+  reestablecarPassword(idUsuario: string): Promise<any> {
+    const uri = environment.apiUrl + '/usuario/reestablecerPasswd/' + idUsuario;
+    return new Promise((resolve,reject) => {
+      this.httpClient.put(uri,{}).toPromise()
+      .then(success => {
+        resolve(success);
+      })
+      .catch(error => {
+        reject(error);
+      })
+    });
+  }
+
 }

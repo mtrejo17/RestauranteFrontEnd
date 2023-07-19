@@ -41,7 +41,10 @@
                 <i [ngClass]="(usuario.activo) ? 'fas fa-check-circle active' : 'fas fa-times-circle inactive'"></i>
               </td>
               <td>
-                <a class="link me-2"  placement="top" ngbTooltip="Editar" (click)="editarUsuario(usuario)"><i class="fas fa-pencil-alt"></i></a>
+                <a class="link me-2 m-1"  placement="top" ngbTooltip="Editar" (click)="editarUsuario(usuario)"><i class="fas fa-pencil-alt"></i></a>
+                <a class="link me-2 m-1"  *ngIf="!usuario.activo" placement="top" ngbTooltip="Activar" (click)="activarUsuario(usuario)"><i class="fas fa-check-circle"></i></a>
+                <a class="link me-2 m-1"  *ngIf="usuario.activo" placement="top" ngbTooltip="Desactivar" (click)="desactivarusuario(usuario)"><i class="fas fa-times-circle"></i></a>
+                <a class="link me-2 m-1"  *ngIf="usuario.activo" placement="top" ngbTooltip="Reestablecer Contrasena" (click)="reestablecarPassword(usuario)"><i class="fas fa-key"></i></a>
               </td>
             </tr>
           </tbody>

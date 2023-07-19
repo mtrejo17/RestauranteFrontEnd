@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2'
 import { UsuarioModalComponent } from '../usuario-modal/usuario-modal.component';
 
 @Component({
@@ -56,6 +57,70 @@ export class UsuariosComponent implements OnInit {
       .catch(error => {
 
       });
+  }
+
+  activarUsuario(usuario: any) {
+    Swal.fire({
+      title: 'Desea activar Usuario?',
+      showDenyButton: true,
+      confirmButtonText: 'Activar',
+      denyButtonText: `No Activar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.usuarioService.activarUsuario(usuario._id)
+        .then(success => {
+          this.cargarUsuarios();
+          Swal.fire('Activado!', 'Usuario activado', 'success');
+        })
+        .catch(error => {
+          Swal.fire('No Activado!', 'Usuario no activado', 'error');
+        })
+
+      }
+    });
+  }
+
+  desactivarusuario(usuario: any) {
+    Swal.fire({
+      title: 'Desea desactivar Usuario?',
+      showDenyButton: true,
+      confirmButtonText: 'Desactivar',
+      denyButtonText: `No Desactivar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.usuarioService.desactivarUsuario(usuario._id)
+        .then(success => {
+          this.cargarUsuarios();
+          Swal.fire('Desactivado!', 'Usuario desactivado', 'success');
+        })
+        .catch(error => {
+          Swal.fire('No Desactivado!', 'Usuario no desactivado', 'error');
+        })
+
+      }
+    });
+  }
+
+  reestablecarPassword(usuario: any) {
+    Swal.fire({
+      title: 'Desea reestablecer constrasena?',
+      showDenyButton: true,
+      confirmButtonText: 'Si reestableerla',
+      denyButtonText: `No Reestablecer`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.usuarioService.reestablecarPassword(usuario._id)
+        .then(success => {
+          Swal.fire('Reestablecida!', 'Contrasena Reestablecida', 'success');
+        })
+        .catch(error => {
+          Swal.fire('No Reestablecida!', 'Contrasena  no Reestablecida', 'error');
+        });
+      }
+    });
   }
 
 }
